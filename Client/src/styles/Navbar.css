@@ -1,0 +1,15 @@
+.navbar-logo {
+    border-radius: 30px;
+    border: 2px solid white;
+    object-fit: contain;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link:hover {
+  color: #b30000 !important; /* rojo gourmet */
+  text-decoration: underline;
+  transition: all 0.2s ease-in-out;
+}
+
+
+

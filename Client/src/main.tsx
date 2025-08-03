@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importa Bootstrap globalmente
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
