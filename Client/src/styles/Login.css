@@ -1,0 +1,11 @@
+.login-page {
+  min-height: 70vh;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.card h2 {
+  color: #b30000;
+}

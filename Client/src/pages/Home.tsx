@@ -14,31 +14,61 @@ interface Producto {
 const productos: Producto[] = [
   {
     id: 1,
-    nombre: "Lomo Liso Premium",
+    nombre: "Huachalomo",
     peso: "1.7 kg",
     corte: "Corte Criollo",
-    precio: "$30.995",
-    imagen: "src/assets/lomo-liso.jpg",
+    precio: "$10.995",
+    imagen: "src/assets/huachalomo .png",
     almacen: "ALMACÉN",
   },
   {
     id: 2,
-    nombre: "Teclas de Lomo Premium",
+    nombre: "Lomo Vetado",
     peso: "500 grs.",
     corte: "Corte Criollo",
-    precio: "$9.995",
-    imagen: "src/assets/Teclas de lomo.jpg",
+    precio: "$12.995",
+    imagen: "src/assets/Lomo-Vetado.png",
     almacen: "ALMACÉN",
   },
   {
     id: 3,
-    nombre: "Posta Rosada Premium",
+    nombre: "Lomo liso",
     peso: "1.4 kg",
     corte: "Corte Criollo",
-    precio: "$16.786",
-    imagen: "src/assets/posta-rosada.jpg",
+    precio: "$15.786",
+    imagen: "src/assets/Lomo-liso.png",
     almacen: "ALMACÉN",
   },
+
+{
+    id: 4,
+    nombre: "Posta Rosada",
+    peso: "1.7 kg",
+    corte: "Corte Criollo",
+    precio: "$11.995",
+    imagen: "src/assets/Posta-Rosada.png",
+    almacen: "ALMACÉN",
+  },
+  {
+    id: 5,
+    nombre: "Sobre Costilla",
+    peso: "500 grs.",
+    corte: "Corte Criollo",
+    precio: "$12.995",
+    imagen: "src/assets/Sobre-Costilla.png",
+    almacen: "ALMACÉN",
+  },
+  {
+    id: 6,
+    nombre: "Tapapecho",
+    peso: "1.7 kg",
+    corte: "Corte Criollo",
+    precio: "$18.786",
+    imagen: "src/assets/Tapapecho.png",
+    almacen: "ALMACÉN",
+  },
+
+
 ];
 
 const Home: React.FC = () => {
@@ -51,7 +81,7 @@ const Home: React.FC = () => {
           <select className="form-select w-auto">
             <option>Ordenar por: Características</option>
           </select>
-          <span className="text-muted">28 productos</span>
+          <span className="text-muted">12 productos</span>
           <select className="form-select w-auto">
             <option>Filtrar</option>
           </select>
