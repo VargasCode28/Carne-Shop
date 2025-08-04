@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import logo from "../assets/carnes-premium.png";
 import "../styles/Navbar.css"
 
+
+
 const Navbar = () => (
   <nav className="navbar navbar-expand-lg navbar-light bg-white  border-bottom  px-4 py-2 shadow-sm">
     <div className="container-fluid">
@@ -15,7 +17,7 @@ const Navbar = () => (
           height="64"
           className= " navbar-logo  d-inline-block align-text-top"
         />
-        <span className="fw-bold fs-4">Carnes Premium</span>
+        <span className="fw-bold fs-4"></span>
       </Link>
 
      
@@ -36,25 +38,10 @@ const Navbar = () => (
       <li className="nav-item">
      <Link className="nav-link d-flex align-items-center gap-2" to="/login">
       <i className="bi bi-person-circle fs-5"></i>
-      <span>Login</span>
+      <span></span>
     </Link>
     </li>
 
-
-
-      {/* <div className="collapse navbar-collapse" id="navbarContent">
-        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-            <Link className="nav-link" to="/login">Login</Link>
-          </li> */}
-
-
-
-
-
-          {/* <li className="nav-item">
-            <Link className="nav-link" to="/productos">Productos</Link>
-          </li> */}
 
           <li className="nav-item">
             <Link className="nav-link d-flex align-items-center gap-2" to="/productos">
@@ -62,10 +49,7 @@ const Navbar = () => (
             <span>Productos</span>
             </Link>
           </li>
-          {/*           
-          <li className="nav-item">
-            <Link className="nav-link" to="/perfil">Perfil </Link>
-          </li> */}
+         
 
           <li className="nav-item">
           <Link className="nav-link d-flex align-items-center gap-2" to="/perfil">
@@ -75,15 +59,10 @@ const Navbar = () => (
           </li>
 
 
-          
-          {/* <li className="nav-item">
-            <Link className="nav-link" to="/carrito">Carrito 🛒</Link>
-          </li> */}
-
           <li className="nav-item">
             <Link className="nav-link d-flex align-items-center gap-2" to="/carrito">
             <i className="bi bi-cart-fill fs-5"></i>
-            <span>Carrito</span>
+            <span></span>
             </Link>
           </li>
         </ul>

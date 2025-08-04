@@ -1,0 +1,26 @@
+.hero {
+  padding: 2rem 0;
+  background-color: #fff;
+}
+
+.title {
+  font-size: 2rem;
+  color: #b30000;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.producto-card {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  transition: box-shadow 0.3s ease;
+}
+
+.producto-card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.precio {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
