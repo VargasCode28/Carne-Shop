@@ -1,26 +1,18 @@
-.hero {
-  padding: 2rem 0;
+.producto-img-wrapper {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
   background-color: #fff;
 }
 
-.title {
-  font-size: 2rem;
-  color: #b30000;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
-}
-
-.producto-card {
-  background-color: #f9f9f9;
-  border: 1px solid #eee;
-  transition: box-shadow 0.3s ease;
-}
-
-.producto-card:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.precio {
-  font-size: 1.1rem;
-  font-weight: bold;
+.producto-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }

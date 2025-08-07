@@ -1,5 +1,6 @@
+
 import React from "react";
-import "../styles/Home.css"
+import "../styles/Home.css";
 
 interface Producto {
   id: number;
@@ -32,15 +33,14 @@ const productos: Producto[] = [
   },
   {
     id: 3,
-    nombre: "Lomo liso",
+    nombre: "Lomo Liso",
     peso: "1.4 kg",
     corte: "Corte Criollo",
     precio: "$15.786",
     imagen: "src/assets/Lomo-liso.png",
     almacen: "ALMACÉN",
   },
-
-{
+  {
     id: 4,
     nombre: "Posta Rosada",
     peso: "1.7 kg",
@@ -67,36 +67,41 @@ const productos: Producto[] = [
     imagen: "src/assets/Tapapecho.png",
     almacen: "ALMACÉN",
   },
-
-
 ];
 
 const Home: React.FC = () => {
   return (
-    <section className="hero">
-      <div className="hero-content container">
-        <h1 className="title">Carnes Premium</h1>
+    <section className="hero py-5 bg-light">
+      <div className="container">
+        <h1 className="title mb-4 text-center fw-bold text-dark">🥩 Carnes Premium</h1>
 
         <div className="filters d-flex justify-content-between align-items-center mb-4">
           <select className="form-select w-auto">
             <option>Ordenar por: Características</option>
           </select>
-          <span className="text-muted">12 productos</span>
+          <span className="text-muted">{productos.length} productos</span>
           <select className="form-select w-auto">
             <option>Filtrar</option>
           </select>
         </div>
 
-        <div className="productos-grid row">
+        <div className="row">
           {productos.map((p) => (
             <div key={p.id} className="col-md-4 mb-4">
-              <div className="producto-card shadow-sm rounded">
-                <img src={p.imagen} alt={p.nombre} className="img-fluid rounded-top" />
-                <div className="info p-3">
-                  <h2 className="fs-5">{p.nombre}</h2>
-                  <p className="mb-1">{p.peso} | {p.corte}</p>
-                  <span className="text-secondary small">{p.almacen}</span>
-                  <strong className="precio d-block mt-2 text-danger">{p.precio}</strong>
+              <div className="card producto-card h-100 shadow-sm border-0 d-flex flex-column">
+                <div className="producto-img-wrapper">
+                  <img src={p.imagen} alt={p.nombre} className="img-fluid producto-img" />
+                </div>
+                <div className="card-body d-flex flex-column justify-content-between">
+                  <div>
+                    <h5 className="card-title fw-semibold text-dark">{p.nombre}</h5>
+                    <p className="card-text text-muted mb-1">{p.peso} · {p.corte}</p>
+                    <span className="badge bg-secondary mb-2">{p.almacen}</span>
+                  </div>
+                  <div className="d-flex justify-content-between align-items-center mt-3">
+                    <strong className="text-danger fs-5">{p.precio}</strong>
+                    <button className="btn btn-sm btn-outline-primary">Agregar</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -108,3 +113,56 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
