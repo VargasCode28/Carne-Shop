@@ -1,16 +1,48 @@
+// import React from 'react';
+// import ReactDOM from 'react-dom/client';
+// import App from './App';
+// import { BrowserRouter } from 'react-router-dom';
+// import 'bootstrap/dist/css/bootstrap.min.css'; 
+// import "bootstrap-icons/font/bootstrap-icons.css";
+// const rootElement = document.getElementById('root');
+
+// if (rootElement) {
+//   ReactDOM.createRoot(rootElement).render(
+//     <React.StrictMode>
+//       <BrowserRouter>
+//         <App />
+//       </BrowserRouter>
+//     </React.StrictMode>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { CarritoProvider } from './context/CarritoContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
+
 const rootElement = document.getElementById('root');
 
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <BrowserRouter>
-        <App />
+        <CarritoProvider> 
+          <App />
+        </CarritoProvider>
       </BrowserRouter>
     </React.StrictMode>
   );
