@@ -1,4 +1,3 @@
-
 import React, { useContext, useState } from "react";
 import "../styles/Home.css";
 import { CarritoContext } from "../context/CarritoContext";
@@ -12,69 +11,43 @@ interface Producto {
   precio: string;
   imagen: string;
   almacen: string;
+  cantidad?: number;
 }
 
-const productos: Producto[] = [
+const accesorios: Producto[] = [
   {
-    id: "1",
-    nombre: "Huachalomo",
-    peso: "1.7 kg",
-    corte: "Corte Criollo",
-    precio: "$10.995",
-    imagen: "src/assets/huachalomo .png",
-    almacen: "ALMACÉN",
+    id: "a1",
+    nombre: "Delantar Parrilla",
+    peso: "N/A",
+    corte: "Utensilio",
+    precio: "$6.990",
+    imagen: "src/assets/delantar .png",
+    almacen: "ACCESORIOS",
   },
   {
-    id: "2",
-    nombre: "Lomo Vetado",
-    peso: "500 grs.",
-    corte: "Corte Criollo",
-    precio: "$12.995",
-    imagen: "src/assets/Lomo-Vetado.png",
-    almacen: "ALMACÉN",
+    id: "a2",
+    nombre: "Cepillo para Parrilla",
+    peso: "N/A",
+    corte: "Limpieza",
+    precio: "$4.990",
+    imagen: "src/assets/Tenedores.png",
+    almacen: "ACCESORIOS",
   },
   {
-    id: "3",
-    nombre: "Lomo Liso",
-    peso: "1.4 kg",
-    corte: "Corte Criollo",
-    precio: "$15.786",
-    imagen: "src/assets/Lomo-liso.png",
-    almacen: "ALMACÉN",
+    id: "a3",
+    nombre: "Parrilla de Acero Inoxidable",
+    peso: "N/A",
+    corte: "Indumentaria",
+    precio: "$14.990",
+    imagen: "src/assets/parrilla.png",
+    almacen: "ACCESORIOS",
   },
-  {
-    id: "4",
-    nombre: "Posta Rosada",
-    peso: "1.7 kg",
-    corte: "Corte Criollo",
-    precio: "$11.995",
-    imagen: "src/assets/Posta-Rosada.png",
-    almacen: "ALMACÉN",
-  },
-  {
-    id: "5",
-    nombre: "Sobre Costilla",
-    peso: "500 grs.",
-    corte: "Corte Criollo",
-    precio: "$12.995",
-    imagen: "src/assets/Sobre-Costilla.png",
-    almacen: "ALMACÉN",
-  },
-  {
-    id: "6",
-    nombre: "Tapapecho",
-    peso: "1.7 kg",
-    corte: "Corte Criollo",
-    precio: "$18.786",
-    imagen: "src/assets/Tapapecho.png",
-    almacen: "ALMACÉN",
-  },
+  
 ];
 
-const Home: React.FC = () => {
+const Accesorios: React.FC = () => {
   const { agregarAlCarrito, usuarioAutenticado } = useContext(CarritoContext);
   const navigate = useNavigate();
-
   const [cantidades, setCantidades] = useState<Record<string, number>>({});
 
   const handleCantidad = (id: string, delta: number) => {
@@ -97,20 +70,20 @@ const Home: React.FC = () => {
   return (
     <section className="hero py-5 bg-light">
       <div className="container">
-        <h1 className="title mb-4 text-center fw-bold text-dark">🥩 Carnes Premium</h1>
+        <h1 className="title mb-4 text-center fw-bold text-dark">🛠️ Accesorios para Parrilla</h1>
 
         <div className="filters d-flex justify-content-between align-items-center mb-4">
           <select className="form-select w-auto">
-            <option>Ordenar por: Características</option>
+            <option>Ordenar por: Categoría</option>
           </select>
-          <span className="text-muted">{productos.length} productos</span>
+          <span className="text-muted">{accesorios.length} accesorios</span>
           <select className="form-select w-auto">
             <option>Filtrar</option>
           </select>
         </div>
 
         <div className="row">
-          {productos.map((p) => (
+          {accesorios.map((p) => (
             <div key={p.id} className="col-md-4 mb-4">
               <div className="card producto-card h-100 shadow-sm border-0 d-flex flex-column">
                 <div className="producto-img-wrapper">
@@ -125,7 +98,6 @@ const Home: React.FC = () => {
                     <span className="badge bg-secondary mb-2">{p.almacen}</span>
                   </div>
 
-                
                   <div className="d-flex align-items-center gap-2 mb-3">
                     <button
                       className="btn btn-sm btn-outline-secondary"
@@ -156,7 +128,7 @@ const Home: React.FC = () => {
                         className="btn btn-sm btn-outline-secondary"
                         onClick={() => navigate("/")}
                       >
-                        Debe Iniciar Sesion
+                        Debe Iniciar Sesión
                       </button>
                     )}
                   </div>
@@ -170,33 +142,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default Accesorios;

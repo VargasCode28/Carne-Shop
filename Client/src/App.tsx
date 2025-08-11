@@ -5,11 +5,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Carrito from './pages/Carrito';
 import Historial from './pages/Historial';
+import Accesorios from './pages/Accesorios';
 
-
-// import Home from './pages/Home';
-// import Productos from './pages/Productos';
-// import Carrito from './pages/Carrito';
 
 function App() {
   return (
@@ -20,6 +17,7 @@ function App() {
          <Route path="/register" element={<Register />} /> 
          <Route path="/carrito" element={<Carrito/>} />
          <Route path ="/historial" element={<Historial/>} />
+         <Route path ="/accesorios" element={<Accesorios/>}  />
       </Route>
     </Routes>
   );

@@ -1,0 +1,30 @@
+.accesorios-page {
+  padding: 2rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.accesorios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.accesorio-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  transition: box-shadow 0.2s ease;
+}
+
+.accesorio-card:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.ver-carrito {
+  display: inline-block;
+  margin-top: 2rem;
+  text-decoration: none;
+  color: #007bff;
+}

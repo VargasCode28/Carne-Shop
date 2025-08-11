@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
           <div className="col-md-4">
             <h6 className="fw-bold mb-3">Contáctanos</h6>
             <p className="small mb-1">📍 Arica, Chile</p>
-            <p className="small mb-1">📞 +56 9 1234 5678</p>
+            <p className="small mb-1">📞 +66 6 6666 6666</p>
             <p className="small mb-3">✉️ contacto@carnespremium.cl</p>
             <div className="d-flex gap-3">
               <a href="#" className="social-icon"><FaFacebookF /></a>

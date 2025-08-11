@@ -1,6 +1,8 @@
 
 // import { useContext } from "react";
 // import { CarritoContext } from "../context/CarritoContext";
+// import { db, auth } from "../firebase/firebase";
+// import { collection, addDoc, Timestamp } from "firebase/firestore";
 // import "../styles/Carrito.css";
 
 // const Carrito = () => {
@@ -8,14 +10,40 @@
 
 //   const calcularTotal = () => {
 //     return carrito.reduce((acc, p) => {
-//       const precioNumerico = parseFloat(p.precio.replace("$", "").replace(".", "").replace(",", "."));
+//       const precioNumerico = parseFloat(
+//         p.precio.replace("$", "").replace(".", "").replace(",", ".")
+//       );
 //       return acc + precioNumerico * p.cantidad;
 //     }, 0);
 //   };
 
-//   const handlePagoSimulado = (metodo: string) => {
-//     alert(`Simulando pago con ${metodo}...`);
-//     limpiarCarrito(); 
+//   const handlePagoSimulado = async (metodo: string) => {
+//     const user = auth.currentUser;
+//     if (!user) return alert("Debes iniciar sesión para confirmar el pedido.");
+
+//     const orden = {
+//       usuario: user.email,
+//       metodoPago: metodo,
+//       productos: carrito.map((p) => ({
+//         id: p.id,
+//         nombre: p.nombre,
+//         cantidad: p.cantidad,
+//         precio: p.precio,
+//         peso: p.peso,
+//         corte: p.corte,
+//       })),
+//       total: calcularTotal(),
+//       fecha: Timestamp.now(),
+//     };
+
+//     try {
+//       await addDoc(collection(db, "ordenes"), orden);
+//       alert(`Pago simulado con ${metodo}. Orden guardada.`);
+//       limpiarCarrito();
+//     } catch (error) {
+//       console.error("Error al guardar la orden:", error);
+//       alert("Hubo un problema al guardar la orden.");
+//     }
 //   };
 
 //   return (
@@ -165,27 +193,166 @@
 
 
 
-import { useContext } from "react";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useContext, useState } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 import { db, auth } from "../firebase/firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import FormularioPago from "../pages/FormularioPago";
 import "../styles/Carrito.css";
 
 const Carrito = () => {
   const { carrito, quitarDelCarrito, limpiarCarrito } = useContext(CarritoContext);
+  const [metodoSeleccionado, setMetodoSeleccionado] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const normalizarPrecio = (precio: string | number): number => {
+    if (typeof precio === "number") return precio;
+
+    const limpio = precio
+      .replace(/[^\d,]/g, "") // elimina símbolos excepto coma
+      .replace(/\./g, "")     // elimina puntos de miles
+      .replace(",", ".");     // convierte coma decimal
+
+    const valor = parseFloat(limpio);
+    return isNaN(valor) ? 0 : valor;
+  };
 
   const calcularTotal = () => {
     return carrito.reduce((acc, p) => {
-      const precioNumerico = parseFloat(
-        p.precio.replace("$", "").replace(".", "").replace(",", ".")
-      );
+      const precioNumerico = normalizarPrecio(p.precio);
       return acc + precioNumerico * p.cantidad;
     }, 0);
   };
 
-  const handlePagoSimulado = async (metodo: string) => {
+  const handlePagoSimulado = async (
+    metodo: string,
+    formData: { nombre: string; email: string; tarjeta?: string }
+  ) => {
     const user = auth.currentUser;
-    if (!user) return alert("Debes iniciar sesión para confirmar el pedido.");
+    if (!user) {
+      return Swal.fire({
+        icon: "warning",
+        title: "Sesión requerida",
+        text: "Debes iniciar sesión para confirmar el pedido.",
+      });
+    }
 
     const orden = {
       usuario: user.email,
@@ -204,11 +371,26 @@ const Carrito = () => {
 
     try {
       await addDoc(collection(db, "ordenes"), orden);
-      alert(`Pago simulado con ${metodo}. Orden guardada.`);
+      await Swal.fire({
+        title: "✅ Pago confirmado",
+        html: `
+          <p><strong>Método:</strong> ${metodo}</p>
+          <p><strong>Nombre:</strong> ${formData.nombre}</p>
+          <p><strong>Email:</strong> ${formData.email}</p>
+          <p><strong>Total:</strong> $${calcularTotal().toFixed(2)}</p>
+        `,
+        icon: "success",
+        confirmButtonText: "Ver historial",
+      });
       limpiarCarrito();
+      navigate("/historial");
     } catch (error) {
       console.error("Error al guardar la orden:", error);
-      alert("Hubo un problema al guardar la orden.");
+      Swal.fire({
+        icon: "error",
+        title: "Error al guardar",
+        text: "Hubo un problema al guardar la orden.",
+      });
     }
   };
 
@@ -260,7 +442,7 @@ const Carrito = () => {
               <div className="d-flex flex-column gap-3">
                 <button
                   className="btn btn-lg btn-outline-primary d-flex justify-content-between align-items-center px-4 py-2"
-                  onClick={() => handlePagoSimulado("PayPal")}
+                  onClick={() => setMetodoSeleccionado("PayPal")}
                 >
                   <span className="fw-semibold">PayPal</span>
                   <i className="bi bi-paypal fs-4"></i>
@@ -268,12 +450,21 @@ const Carrito = () => {
 
                 <button
                   className="btn btn-lg btn-outline-success d-flex justify-content-between align-items-center px-4 py-2"
-                  onClick={() => handlePagoSimulado("Tarjeta de Crédito")}
+                  onClick={() => setMetodoSeleccionado("Tarjeta de Crédito")}
                 >
                   <span className="fw-semibold">Tarjeta de Crédito</span>
                   <i className="bi bi-credit-card fs-4"></i>
                 </button>
               </div>
+
+              {metodoSeleccionado && (
+                <FormularioPago
+                  metodo={metodoSeleccionado}
+                  onConfirmar={(formData: { nombre: string; email: string; tarjeta?: string }) =>
+                    handlePagoSimulado(metodoSeleccionado, formData)
+                  }
+                />
+              )}
 
               <hr className="my-4" />
 
