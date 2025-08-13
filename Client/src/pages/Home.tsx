@@ -71,10 +71,19 @@ const productos: Producto[] = [
   },
 ];
 
+const normalizarPrecio = (precio: string | number): number => {
+  if (typeof precio === "number") return precio;
+  const limpio = precio.replace(/[^\d,]/g, "").replace(/\./g, "").replace(",", ".");
+  const valor = parseFloat(limpio);
+  return isNaN(valor) ? 0 : valor;
+};
+
+const formatoCLP = (valor: number): string =>
+  new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP" }).format(valor);
+
 const Home: React.FC = () => {
   const { agregarAlCarrito, usuarioAutenticado } = useContext(CarritoContext);
   const navigate = useNavigate();
-
   const [cantidades, setCantidades] = useState<Record<string, number>>({});
 
   const handleCantidad = (id: string, delta: number) => {
@@ -97,73 +106,60 @@ const Home: React.FC = () => {
   return (
     <section className="hero py-5 bg-light">
       <div className="container">
-        <h1 className="title mb-4 text-center fw-bold text-dark">🥩 Carnes Premium</h1>
+        <h1 className="title mb-4 text-center fw-bold text-dark display-5">🥩 Carnes Premium</h1>
 
-        <div className="filters d-flex justify-content-between align-items-center mb-4">
-          <select className="form-select w-auto">
+        <div className="filters d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+          <select className="form-select form-select-sm w-auto shadow-sm">
             <option>Ordenar por: Características</option>
           </select>
-          <span className="text-muted">{productos.length} productos</span>
-          <select className="form-select w-auto">
+          <span className="text-muted small">{productos.length} productos disponibles</span>
+          <select className="form-select form-select-sm w-auto shadow-sm">
             <option>Filtrar</option>
           </select>
         </div>
 
         <div className="row">
-          {productos.map((p) => (
-            <div key={p.id} className="col-md-4 mb-4">
-              <div className="card producto-card h-100 shadow-sm border-0 d-flex flex-column">
-                <div className="producto-img-wrapper">
-                  <img src={p.imagen} alt={p.nombre} className="img-fluid producto-img" />
-                </div>
-                <div className="card-body d-flex flex-column justify-content-between">
-                  <div>
-                    <h5 className="card-title fw-semibold text-dark">{p.nombre}</h5>
-                    <p className="card-text text-muted mb-1">
-                      {p.peso} · {p.corte}
-                    </p>
-                    <span className="badge bg-secondary mb-2">{p.almacen}</span>
-                  </div>
+          {productos.map((p) => {
+            const cantidad = cantidades[p.id] || 1;
+            const precioUnitario = normalizarPrecio(p.precio);
+            const precioTotal = precioUnitario * cantidad;
 
-                
-                  <div className="d-flex align-items-center gap-2 mb-3">
-                    <button
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={() => handleCantidad(p.id, -1)}
-                    >
-                      –
-                    </button>
-                    <span className="fw-bold">{cantidades[p.id] || 1}</span>
-                    <button
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={() => handleCantidad(p.id, 1)}
-                    >
-                      +
-                    </button>
+            return (
+              <div key={p.id} className="col-md-4 mb-4">
+                <div className="card producto-card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                  <div className="producto-img-wrapper bg-light text-center p-3">
+                    <img src={p.imagen} alt={p.nombre} className="img-fluid producto-img rounded-3" />
                   </div>
+                  <div className="card-body d-flex flex-column justify-content-between">
+                    <div>
+                      <h5 className="card-title fw-bold text-dark mb-1">{p.nombre}</h5>
+                      <p className="card-text text-muted small mb-1">{p.peso} · {p.corte}</p>
+                      <span className="badge bg-gradient bg-secondary mb-2">{p.almacen}</span>
+                    </div>
 
-                  <div className="d-flex justify-content-between align-items-center">
-                    <strong className="text-danger fs-5">{p.precio}</strong>
-                    {usuarioAutenticado ? (
-                      <button
-                        className="btn btn-sm btn-outline-primary"
-                        onClick={() => handleAgregar(p)}
-                      >
-                        Agregar
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-sm btn-outline-secondary"
-                        onClick={() => navigate("/")}
-                      >
-                        Debe Iniciar Sesion
-                      </button>
-                    )}
+                    <div className="d-flex align-items-center justify-content-between mb-3">
+                      <div className="input-group input-group-sm w-50">
+                        <button className="btn btn-outline-secondary" onClick={() => handleCantidad(p.id, -1)}>–</button>
+                        <span className="input-group-text fw-bold">{cantidad}</span>
+                        <button className="btn btn-outline-secondary" onClick={() => handleCantidad(p.id, 1)}>+</button>
+                      </div>
+                      <div className="text-end">
+                        <div className="text-danger fw-semibold small">{p.precio} c/u</div>
+                        <div className="text-success fw-bold">{formatoCLP(precioTotal)} total</div>
+                      </div>
+                    </div>
+
+                    <button
+                      className={`btn btn-sm ${usuarioAutenticado ? "btn-primary" : "btn-outline-secondary"} w-100`}
+                      onClick={() => usuarioAutenticado ? handleAgregar(p) : navigate("/")}
+                    >
+                      {usuarioAutenticado ? "Agregar al carrito" : "Debe iniciar sesión"}
+                    </button>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -171,32 +167,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

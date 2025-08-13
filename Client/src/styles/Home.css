@@ -1,4 +1,4 @@
-.producto-img-wrapper {
+/* .producto-img-wrapper {
   height: 200px;
   width: 100%;
   overflow: hidden;
@@ -15,4 +15,30 @@
   width: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+} */
+
+
+
+
+
+
+
+
+
+
+.producto-card {
+  transition: transform 0.2s ease;
+}
+.producto-card:hover {
+  transform: translateY(-4px);
+}
+.producto-img-wrapper {
+  background-color: #f8f9fa;
+}
+.producto-img {
+  max-height: 200px;
+  object-fit: contain;
+}
+.filters select {
+  min-width: 180px;
 }
