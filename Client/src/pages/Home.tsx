@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 import "../styles/Home.css";
 import { CarritoContext } from "../context/CarritoContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 interface Producto {
   id: string;
@@ -21,7 +21,7 @@ const productos: Producto[] = [
     peso: "1.7 kg",
     corte: "Corte Criollo",
     precio: "$10.995",
-    imagen: "src/assets/huachalomo .png",
+    imagen: "src/assets/Huachalomo.jpg",
     almacen: "ALMACÉN",
   },
   {
@@ -29,8 +29,8 @@ const productos: Producto[] = [
     nombre: "Lomo Vetado",
     peso: "500 grs.",
     corte: "Corte Criollo",
-    precio: "$12.995",
-    imagen: "src/assets/Lomo-Vetado.png",
+     precio: "$12.995",
+    imagen: "src/assets/lomo_vetado.jpg",
     almacen: "ALMACÉN",
   },
   {
@@ -39,7 +39,7 @@ const productos: Producto[] = [
     peso: "1.4 kg",
     corte: "Corte Criollo",
     precio: "$15.786",
-    imagen: "src/assets/Lomo-liso.png",
+    imagen: "src/assets/lomito.jpg",
     almacen: "ALMACÉN",
   },
   {
@@ -48,7 +48,7 @@ const productos: Producto[] = [
     peso: "1.7 kg",
     corte: "Corte Criollo",
     precio: "$11.995",
-    imagen: "src/assets/Posta-Rosada.png",
+    imagen: "src/assets/posta_rosada.jpg",
     almacen: "ALMACÉN",
   },
   {
@@ -57,7 +57,7 @@ const productos: Producto[] = [
     peso: "500 grs.",
     corte: "Corte Criollo",
     precio: "$12.995",
-    imagen: "src/assets/Sobre-Costilla.png",
+    imagen: "src/assets/sobre_costilla.jpg",
     almacen: "ALMACÉN",
   },
   {
@@ -66,7 +66,7 @@ const productos: Producto[] = [
     peso: "1.7 kg",
     corte: "Corte Criollo",
     precio: "$18.786",
-    imagen: "src/assets/Tapapecho.png",
+    imagen: "src/assets/tapapecho.jpg",
     almacen: "ALMACÉN",
   },
 ];
@@ -81,10 +81,18 @@ const normalizarPrecio = (precio: string | number): number => {
 const formatoCLP = (valor: number): string =>
   new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP" }).format(valor);
 
+
+type OutletContextType = {
+  busqueda: string;
+  setBusqueda: React.Dispatch<React.SetStateAction<string>>;
+};
+
 const Home: React.FC = () => {
   const { agregarAlCarrito, usuarioAutenticado } = useContext(CarritoContext);
   const navigate = useNavigate();
   const [cantidades, setCantidades] = useState<Record<string, number>>({});
+  const outletContext = useOutletContext<OutletContextType | undefined>();
+  const busqueda = outletContext?.busqueda || "";
 
   const handleCantidad = (id: string, delta: number) => {
     setCantidades((prev) => {
@@ -103,23 +111,45 @@ const Home: React.FC = () => {
     navigate("/carrito");
   };
 
+  const productosFiltrados = productos.filter((p) =>
+    p.nombre.toLowerCase().includes((busqueda || "").toLowerCase())
+  );
+
   return (
-    <section className="hero py-5 bg-light">
-      <div className="container">
-        <h1 className="title mb-4 text-center fw-bold text-dark display-5">🥩 Carnes Premium</h1>
+    // <section className="hero py-5 bg-light">
+    //   <div className="container">
+    //     <h1 className="title mb-4 text-center fw-bold text-dark display-5">🥩 Carnes Premium</h1>
+    
+   
+<section className="hero py-5 bg-light">
+  <div className="container">
+
+  
+    <div className="bg-gradient-red text-white py-4 px-3 rounded-4 shadow text-center mb-5">
+      <div className="d-flex justify-content-center align-items-center gap-3 flex-wrap">
+        <img src="src/assets/carnes-premium.png" alt="Icono carne" style={{ width: "50px", height: "50px", borderRadius: "50%"   }} />
+        <h1 className="display-5 fw-bold m-0">Carnes Premium</h1>
+      </div>
+      <p className="fs-5 mt-3 mb-0">Del campo a tu mesa · Calidad garantizada 🐄</p>
+      <hr className="w-25 mx-auto border-light border-2 rounded-pill mt-3" />
+    </div>
+
+
+     
+
 
         <div className="filters d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
           <select className="form-select form-select-sm w-auto shadow-sm">
             <option>Ordenar por: Características</option>
           </select>
-          <span className="text-muted small">{productos.length} productos disponibles</span>
+          <span className="text-muted small">{productosFiltrados.length} productos disponibles</span>
           <select className="form-select form-select-sm w-auto shadow-sm">
             <option>Filtrar</option>
           </select>
         </div>
 
         <div className="row">
-          {productos.map((p) => {
+          {productosFiltrados.map((p) => {
             const cantidad = cantidades[p.id] || 1;
             const precioUnitario = normalizarPrecio(p.precio);
             const precioTotal = precioUnitario * cantidad;

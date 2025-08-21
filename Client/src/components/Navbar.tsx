@@ -7,9 +7,13 @@ import Swal from "sweetalert2";
 import logo from "../assets/carnes-premium.png";
 import "../styles/Navbar.css";
 
-const Navbar = () => {
+interface NavbarProps {
+  busqueda: string;
+  setBusqueda: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ busqueda, setBusqueda }) => {
   const [user, setUser] = useState<any>(null);
-  const [busqueda, setBusqueda] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
 
@@ -70,7 +74,7 @@ const Navbar = () => {
             alt="Carnes Premium Logo"
             className={`navbar-logo ${scrolled ? "logo-small" : "logo-large"}`}
           />
-          <span className="fw-bold fs-4">Carnes Premium</span>
+          <span className="fw-bold fs-4"></span>
         </Link>
 
         <button

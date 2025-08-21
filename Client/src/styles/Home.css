@@ -42,3 +42,9 @@
 .filters select {
   min-width: 180px;
 }
+
+
+
+.bg-gradient-red {
+  background: linear-gradient(to right, #b71c1c, #f44336);
+}
