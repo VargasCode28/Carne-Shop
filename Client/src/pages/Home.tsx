@@ -180,7 +180,7 @@ const Home: React.FC = () => {
                     </div>
 
                     <button
-                      className={`btn btn-sm ${usuarioAutenticado ? "btn-primary" : "btn-outline-secondary"} w-100`}
+                      className={`btn btn-sm ${usuarioAutenticado ? "btn-dark" : "btn-outline-secondary"} w-100`}
                       onClick={() => usuarioAutenticado ? handleAgregar(p) : navigate("/")}
                     >
                       {usuarioAutenticado ? "Agregar al carrito" : "Debe iniciar sesión"}
