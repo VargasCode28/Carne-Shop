@@ -1,4 +1,3 @@
-
 import React, { useContext, useState } from "react";
 import "../styles/Home.css";
 import { CarritoContext } from "../context/CarritoContext";
@@ -116,10 +115,6 @@ const Home: React.FC = () => {
   );
 
   return (
-    // <section className="hero py-5 bg-light">
-    //   <div className="container">
-    //     <h1 className="title mb-4 text-center fw-bold text-dark display-5">🥩 Carnes Premium</h1>
-    
    
 <section className="hero py-5 bg-light">
   <div className="container">
@@ -127,16 +122,12 @@ const Home: React.FC = () => {
   
     <div className="bg-gradient-red text-white py-4 px-3 rounded-4 shadow text-center mb-5">
       <div className="d-flex justify-content-center align-items-center gap-3 flex-wrap">
-         <img src="src/assets/carnes-premium.png" alt="Icono carne" style={{ width: "50px", height: "50px", borderRadius: "50%"   }} />
+         {/* <img src="#" alt="Icono carne" style={{ width: "50px", height: "50px", borderRadius: "50%"   }} /> */}
         <h1 className="display-5 fw-bold m-0">Carnes Premium</h1>
       </div>
       <p className="fs-5 mt-3 mb-0">Del campo a tu mesa · Calidad garantizada.</p>
       <hr className="w-25 mx-auto border-light border-2 rounded-pill mt-3" />
     </div>
-
-
-     
-
 
         <div className="filters d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
           <select className="form-select form-select-sm w-auto shadow-sm">
@@ -174,8 +165,7 @@ const Home: React.FC = () => {
                         <button className="btn btn-outline-secondary" onClick={() => handleCantidad(p.id, 1)}>+</button>
                       </div>
                       <div className="text-end">
-                        <div className="text-danger fw-semibold small">{p.precio} c/u</div>
-                        <div className="text-success fw-bold">{formatoCLP(precioTotal)} total</div>
+                         <div className="text-success fw-bold">{formatoCLP(precioTotal)} total</div> 
                       </div>
                     </div>
 

@@ -1,33 +1,37 @@
 .footer {
-  background-color: #ccccccbe;
-  color: #000000;
-  font-size: 0.9rem;
-}
-
-.footer h5, .footer h6 {
-  color: #000000;
+  background-color: #101010;
+  color: #f8f9fa;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .footer-link {
-  color: #000000;
+  color: #f8f9fa;
   text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-  text-decoration: underline;
-  color: #000000;
+  color: #dc3545;
 }
 
 .social-icon {
-  color: #000000;
   font-size: 1.2rem;
-  transition: color 0.3s;
-}
-
-.small{
-  color: #000000;
+  color: #f8f9fa;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .social-icon:hover {
-  color: #ff4d4d;
+  color: #dc3545;
+  transform: scale(1.2);
+}
+
+.footer h4,
+.footer h5 {
+  color: #ffffff;
+}
+
+.footer hr {
+  border-color: rgb(255, 255, 255);
 }

@@ -86,7 +86,7 @@ const Carrito = () => {
 
   return (
     <div className="container py-5">
-      <h2 className="mb-4 fw-bold text-center">Ver Productos Agregados</h2>
+      <h2 className="mb-4 fw-bold text-center"></h2>
 
       {carrito.length === 0 ? (
         <div className="text-center text-muted">

@@ -42,8 +42,17 @@ const accesorios: Producto[] = [
     imagen: "src/assets/parrilla.png",
     almacen: "ACCESORIOS",
   },
-  
 ];
+
+const normalizarPrecio = (precio: string | number): number => {
+  if (typeof precio === "number") return precio;
+  const limpio = precio.replace(/[^\d,]/g, "").replace(/\./g, "").replace(",", ".");
+  const valor = parseFloat(limpio);
+  return isNaN(valor) ? 0 : valor;
+};
+
+const formatoCLP = (valor: number): string =>
+  new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP" }).format(valor);
 
 const Accesorios: React.FC = () => {
   const { agregarAlCarrito, usuarioAutenticado } = useContext(CarritoContext);
@@ -83,59 +92,67 @@ const Accesorios: React.FC = () => {
         </div>
 
         <div className="row">
-          {accesorios.map((p) => (
-            <div key={p.id} className="col-md-4 mb-4">
-              <div className="card producto-card h-100 shadow-sm border-0 d-flex flex-column">
-                <div className="producto-img-wrapper">
-                  <img src={p.imagen} alt={p.nombre} className="img-fluid producto-img" />
-                </div>
-                <div className="card-body d-flex flex-column justify-content-between">
-                  <div>
-                    <h5 className="card-title fw-semibold text-dark">{p.nombre}</h5>
-                    <p className="card-text text-muted mb-1">
-                      {p.peso} · {p.corte}
-                    </p>
-                    <span className="badge bg-secondary mb-2">{p.almacen}</span>
-                  </div>
+          {accesorios.map((p) => {
+            const cantidad = cantidades[p.id] || 1;
+            const precioUnitario = normalizarPrecio(p.precio);
+            const precioTotal = precioUnitario * cantidad;
 
-                  <div className="d-flex align-items-center gap-2 mb-3">
-                    <button
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={() => handleCantidad(p.id, -1)}
-                    >
-                      –
-                    </button>
-                    <span className="fw-bold">{cantidades[p.id] || 1}</span>
-                    <button
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={() => handleCantidad(p.id, 1)}
-                    >
-                      +
-                    </button>
+            return (
+              <div key={p.id} className="col-md-4 mb-4">
+                <div className="card producto-card h-100 shadow-sm border-0 d-flex flex-column">
+                  <div className="producto-img-wrapper">
+                    <img src={p.imagen} alt={p.nombre} className="img-fluid producto-img" />
                   </div>
+                  <div className="card-body d-flex flex-column justify-content-between">
+                    <div>
+                      <h5 className="card-title fw-semibold text-dark">{p.nombre}</h5>
+                      <p className="card-text text-muted mb-1">
+                        {p.peso} · {p.corte}
+                      </p>
+                      <span className="badge bg-secondary mb-2">{p.almacen}</span>
+                    </div>
 
-                  <div className="d-flex justify-content-between align-items-center">
-                    <strong className="text-danger fs-5">{p.precio}</strong>
-                    {usuarioAutenticado ? (
-                      <button
-                        className="btn btn-sm btn-outline-primary"
-                        onClick={() => handleAgregar(p)}
-                      >
-                        Agregar
-                      </button>
-                    ) : (
+                    <div className="d-flex align-items-center gap-2 mb-3">
                       <button
                         className="btn btn-sm btn-outline-secondary"
-                        onClick={() => navigate("/")}
+                        onClick={() => handleCantidad(p.id, -1)}
                       >
-                        Debe Iniciar Sesión
+                        –
                       </button>
-                    )}
+                      <span className="fw-bold">{cantidad}</span>
+                      <button
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => handleCantidad(p.id, 1)}
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="text-success fw-bold">
+                        {formatoCLP(precioTotal)} total
+                      </div>
+                      {usuarioAutenticado ? (
+                        <button
+                          className="btn btn-sm btn-outline-dark"
+                          onClick={() => handleAgregar(p)}
+                        >
+                          Agregar al carrito
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-sm btn-outline-secondary"
+                          onClick={() => navigate("/")}
+                        >
+                          Debe Iniciar Sesión
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
