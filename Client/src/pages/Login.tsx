@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { auth } from "../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
+
+import {signInWithPopup} from "firebase/auth";
+import {googleProvider } from "../firebase/firebase";
+
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -30,6 +34,17 @@ const Login: React.FC = () => {
       alert("Credenciales inválidas");
     }
   };
+  
+
+const handleGoogleLogin = async () => {
+  try{
+    await signInWithPopup(auth, googleProvider);
+    navigate("");
+  } catch (error: any) {
+    alert("Error al iniciar sesion con Google");
+    console.error(error);
+  }
+};
 
   return (
     <div className="login-page container py-5">
@@ -54,6 +69,9 @@ const Login: React.FC = () => {
               />
               <button type="submit" className="btn btn-danger w-100">
                 Iniciar sesión
+              </button>
+              <button onClick={handleGoogleLogin} className="btn btn-outline-primary w-100 mt-3">
+                Iniciar sesion con Google
               </button>
             </form>
             <div className="text-center mt-3">

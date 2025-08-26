@@ -1,7 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, {useEffect, useContext, useState } from "react";
 import "../styles/Home.css";
 import { CarritoContext } from "../context/CarritoContext";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import {auth} from "../firebase/firebase";
+
 
 interface Producto {
   id: string;
@@ -93,6 +95,9 @@ const Home: React.FC = () => {
   const outletContext = useOutletContext<OutletContextType | undefined>();
   const busqueda = outletContext?.busqueda || "";
 
+  
+
+
   const handleCantidad = (id: string, delta: number) => {
     setCantidades((prev) => {
       const nuevaCantidad = Math.max(1, (prev[id] || 1) + delta);
@@ -114,15 +119,17 @@ const Home: React.FC = () => {
     p.nombre.toLowerCase().includes((busqueda || "").toLowerCase())
   );
 
-  return (
+   return (
    
+
+
 <section className="hero py-5 bg-light">
   <div className="container">
   
   
     <div className="bg-gradient-red text-white py-4 px-3 rounded-4 shadow text-center mb-5">
       <div className="d-flex justify-content-center align-items-center gap-3 flex-wrap">
-         {/* <img src="#" alt="Icono carne" style={{ width: "50px", height: "50px", borderRadius: "50%"   }} /> */}
+     
         <h1 className="display-5 fw-bold m-0">Carnes Premium</h1>
       </div>
       <p className="fs-5 mt-3 mb-0">Del campo a tu mesa · Calidad garantizada.</p>
@@ -183,7 +190,105 @@ const Home: React.FC = () => {
         </div>
       </div>
     </section>
-  );
+ );
 };
 
+
+ 
+
+
+
 export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

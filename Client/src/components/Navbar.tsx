@@ -16,10 +16,11 @@
 //   const [user, setUser] = useState<any>(null);
 //   const [scrolled, setScrolled] = useState(false);
 //   const navigate = useNavigate();
+  
+//   const [photoURL, setPhotoURL] = useState<string | null>(null);
 
 //   useEffect(() => {
-   
-//       const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+//     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 //       setUser(currentUser);
 //     });
 //     return () => unsubscribe();
@@ -29,9 +30,35 @@
 //     const handleScroll = () => {
 //       setScrolled(window.scrollY > 50);
 //     };
+
 //     window.addEventListener("scroll", handleScroll);
 //     return () => window.removeEventListener("scroll", handleScroll);
 //   }, []);
+
+
+
+//   const unsubscribe = auth.onAuthStateChanged((user)=>{
+//     if (user?.photoURL) {
+//       setPhotoURL(user.photoURL);
+//     }
+//   });
+//   return () => unsubscribe();
+// }, []);
+// <div className="container py-5 text-center">
+//   {photoURL ? (
+//     <img
+//     src={photoURL}
+//     alt="Foto de perfil"
+//     className="rounded-circle"
+//     style={{width: "120px", height: "120px", objectFit: "cover"}}
+//     />
+//   ) : (
+//     <p>No hay foto disponible</p>
+//   )}
+// </div>
+
+
+
 
 //   const handleLogout = async () => {
 //     const result = await Swal.fire({
@@ -235,65 +262,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebase";
@@ -323,7 +291,6 @@ const Navbar: React.FC<NavbarProps> = ({ busqueda, setBusqueda }) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
