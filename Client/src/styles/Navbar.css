@@ -1,60 +1,3 @@
-/* .navbar {
- 
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-.navbar-scrolled {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-logo {
-  transition: all 0.3s ease-in-out;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.logo-large {
-  width: 90px;
-  height: 90px;
-}
-
-.logo-small {
-  width: 50px;
-  height: 50px;
-}
-
-
-
-.navbar-nav .nav-link:hover {
-  color: #dc3545; 
-  text-decoration: none;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .navbar {
    position: relative;  
@@ -63,7 +6,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 1rem 2rem; /*change */
+  padding: 1rem 2rem; 
   background-color: white;
   transition: box-shadow 0.3s ease-in-out;
 }
@@ -95,6 +38,43 @@
   color: #dc3545;
   text-decoration: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Carrito from './pages/Carrito';
 import Historial from './pages/Historial';
-import Accesorios from './pages/Accesorios';
+
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
          <Route path="/register" element={<Register />} /> 
          <Route path="/carrito" element={<Carrito/>} />
          <Route path ="/historial" element={<Historial/>} />
-         <Route path ="/accesorios" element={<Accesorios/>}  />
+         
       </Route>
     </Routes>
   );
