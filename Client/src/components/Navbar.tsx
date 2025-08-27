@@ -137,13 +137,6 @@ const Navbar: React.FC<NavbarProps> = ({ busqueda, setBusqueda }) => {
               </li>
             )}
 
-            {/* <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center gap-2" to="/accesorios">
-                <i className="bi bi-bag fs-5"></i>
-                <span></span>
-              </Link>
-            </li> */}
-
             <li className="nav-item">
               <Link className="nav-link d-flex align-items-center gap-2" to="/historial">
                 <i className="bi bi-clock-history fs-5"></i>
